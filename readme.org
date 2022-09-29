@@ -1,5 +1,5 @@
-#+:title: Conway's Game of Life
-#+:author: Bacal Mesfin
-#+:date: 2022-09-26
+#+title: Conway's Game of Life
+#+author: Bacal Mesfin
+#+date: 2022-09-26
 
 ** Compiling
