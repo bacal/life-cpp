@@ -7,21 +7,31 @@ namespace life
 {
 	struct vertex
 	{
-		glm::vec3 position;
+		glm::vec2 position;
 		glm::vec3 color;
 	};
+
+	/**
+	 * calculate colors will calculate based on index.
+	 * when generating the vertex vector,
+	 */
+
 	class grid
 	{
 	 private:
 		std::vector<std::vector<cell>> data;
-		glm::vec3 calculate_color(cell c) const;
+		std::vector<glm::vec3> calculate_colors(cell c) const;
 		int n;
-		std::vector<vertex> calculate_vertices(int width) const;
-		std::vector<int> calculate_indices() const;
+		bool updated;
+		std::vector<glm::vec2> vertices;
+		std::vector<int> indices;
+		void calculate_vertices(int width);
+		void calculate_indices();
 	 public:
-		grid(int n); // creates an n by n grid
+		explicit grid(int n); // creates an n by n grid
 		void update_cell(int r, int c, bool state, int time);
-		void draw() const;
+		std::vector<int> get_indices() const;
+		std::vector<vertex> get_vertices() const;
 	};
 
 }
