@@ -1,7 +1,7 @@
 #include <iostream>
 #include <array>
-#include <SDL.h>
-const int grid_size = 100;
+#include <SDL2/SDL.h>
+const int grid_size = 20;
 const int window_width =  800;
 const int window_height = 800;
 static int sim_time = 0;
@@ -88,14 +88,18 @@ int main()
 
 	std::array<std::array<int,grid_size>,grid_size> grid{};
 
+	// pre-populate with a glider
 	grid[2][3] = 1;
 	grid[4][3] = 1;
 	grid[4][4] = 1;
 	grid[3][4] = 1;
 	grid[3][5] = 1;
+
+
 	SDL_Event e;
 	while (true)
 		while(SDL_PollEvent(&e)){
+			auto prev_sim_time = sim_time;
 			switch(e.type){
 			case SDL_QUIT:
 				exit(0);
@@ -113,7 +117,6 @@ int main()
 				mark_living(grid,e.button.x,e.button.y);
 				break;
 			}
-
 
 			draw_grid(grid,renderer);
 			SDL_RenderPresent(renderer);
